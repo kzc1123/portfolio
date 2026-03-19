@@ -27,7 +27,7 @@ export default function Hacks() {
       <div className="relative">
         <h1 className="text-[4rem] sm:text-[6rem] md:text-[8rem] lg:text-[10rem] font-medium tracking-[-0.08em] md:tracking-[-0.1em] leading-[0.9] mb-6 md:mb-8 text-center w-full relative break-words">
           i love {" "}
-          <span 
+          <span
             className="relative bg-clip-text text-transparent pr-2 inline-block"
             style={{
               backgroundImage: 'url(/clip.jpg)',
@@ -40,7 +40,7 @@ export default function Hacks() {
               wordBreak: 'break-word'
             } as CSSProperties}
           >
-            hackathons
+            building
           </span>
         </h1>
       </div>
@@ -49,24 +49,24 @@ export default function Hacks() {
       </div>
       <div className={`w-full ${GeistMono.className}`}>
         <div className="max-w-4xl mx-auto">
-        <div className="grid grid-cols-3 gap-0">
-          {hackathons.map((hackathon, index) => (
-            <div key={index} className="border border-gray-300 p-4 group">
-              <div className="font-medium">{hackathon.name}</div>
-              <div className="text-muted-foreground">
-                {hackathon.description}
+          <div className="grid grid-cols-3 gap-0">
+            {hackathons.map((hackathon, index) => (
+              <div key={index} className="border border-gray-300 p-4 group">
+                <div className="font-medium">{hackathon.name}</div>
+                <div className="text-muted-foreground">
+                  {hackathon.description}
+                </div>
+                <Link
+                  href={hackathon.link}
+                  target="_blank"
+                  className="inline-flex items-center mt-2 text-sm text-blue-500 hover:underline"
+                >
+                  see here <ExternalLink className="w-3 h-3 ml-1" />
+                </Link>
               </div>
-              <Link 
-                href={hackathon.link} 
-                target="_blank"
-                className="inline-flex items-center mt-2 text-sm text-blue-500 hover:underline"
-              >
-                see here <ExternalLink className="w-3 h-3 ml-1" />
-              </Link>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
       </div>
     </div>
   );

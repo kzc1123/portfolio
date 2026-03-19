@@ -1,5 +1,7 @@
 import * as React from "react";
 import Info from "@/components/info";
+import Education from "@/components/education";
+import Experience from "@/components/experience";
 import Projects from "@/components/projects";
 import Exp from "@/components/exp";
 import ContactPage from "@/components/contact";
@@ -17,6 +19,12 @@ export default function Home() {
       <div className="w-full" id="home">
         <Info />
       </div>
+      <div className="w-full">
+        <Education />
+      </div>
+      <div className="w-full">
+        <Experience />
+      </div>
       <div className="w-full" id="work">
         <Exp />
       </div>
@@ -33,7 +41,6 @@ export default function Home() {
         <ContactPage />
       </div>
       <Footer />
-      
     </main>
   );
 }

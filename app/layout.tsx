@@ -6,7 +6,7 @@ import { Analytics } from "@vercel/analytics/react";
 
 
 export const metadata: Metadata = {
-  title: "Chaitanya Chaurasia",
+  title: "Kshitiz Chaurasia",
   description: "this is me!",
 };
 

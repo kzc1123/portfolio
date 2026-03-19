@@ -34,7 +34,7 @@ const ContactPage = () => {
       const templateParams = {
         from_name: senderEmail,
         message: senderMessage,
-        to_name: "Chaitanya",
+        to_name: "Kshitiz",
       };
 
       const response = await emailjs.send(

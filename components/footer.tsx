@@ -12,12 +12,12 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="text-xs font-medium text-muted-foreground">
-            {currentYear} &copy; Chaitanya Chaurasia.
+            {currentYear} &copy; Kshitiz Chaurasia.
           </div>
           <div className="text-xs font-medium text-muted-foreground flex items-center gap-2">
             <GitHubLogoIcon className="w-4 h-4" />
             <Link
-              href="https://github.com/Chaitanya-Chaurasia/portfolio"
+              href="https://github.com/kzc1123/portfolio"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -27,7 +27,7 @@ export default function Footer() {
           </div>
           <div className="flex items-center space-x-4">
             <Link
-              href="https://github.com/Chaitanya-Chaurasia"
+              href="https://github.com/kzc1123"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"
@@ -36,7 +36,7 @@ export default function Footer() {
               <GitHubLogoIcon className="w-4 h-4" />
             </Link>
             <Link
-              href="https://linkedin.com/in/chai-t"
+              href="https://www.linkedin.com/in/kshitizchaurasia/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"

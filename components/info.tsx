@@ -1,44 +1,42 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import stealth from "@/public/stealth.jpg";
 import Link from "next/link";
-import { LinkedInLogoIcon } from "@radix-ui/react-icons";
 
-function WifiWaves() {
+function Typewriter({ text }: { text: string }) {
+  const [display, setDisplay] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const speed = isDeleting ? 50 : 120;
+
+    if (!isDeleting && display === text) {
+      const pause = setTimeout(() => setIsDeleting(true), 2000);
+      return () => clearTimeout(pause);
+    }
+
+    if (isDeleting && display === "") {
+      const pause = setTimeout(() => setIsDeleting(false), 500);
+      return () => clearTimeout(pause);
+    }
+
+    const timer = setTimeout(() => {
+      setDisplay(
+        isDeleting
+          ? text.substring(0, display.length - 1)
+          : text.substring(0, display.length + 1)
+      );
+    }, speed);
+
+    return () => clearTimeout(timer);
+  }, [display, isDeleting, text]);
+
   return (
-    <span className="inline-flex items-center ml-2 gap-[3px]">
-      <style>{`
-        @keyframes wave {
-          0%, 100% { opacity: 0.15; }
-          50% { opacity: 1; }
-        }
-      `}</style>
-      {["·", ")", ")", ")"].map((char, i) => (
-        <span
-          key={i}
-          className="text-black font-semibold"
-          style={{
-            animation: `wave 2s ease-in-out infinite`,
-            animationDelay: `${i * 0.3}s`,
-          }}
-        >
-          {char}
-        </span>
-      ))}
-      <span className="mx-1 opacity-30">~</span>
-      {["(", "(", "(", "·"].map((char, i) => (
-        <span
-          key={i}
-          className="text-black font-semibold"
-          style={{
-            animation: `wave 2s ease-in-out infinite`,
-            animationDelay: `${(3 - i) * 0.3}s`,
-          }}
-        >
-          {char}
-        </span>
-      ))}
+    <span>
+      {display}
+      <span className="animate-pulse">|</span>
     </span>
   );
 }
@@ -49,31 +47,27 @@ export default function Info() {
       <div className="w-full flex flex-col items-center justify-center min-h-[500px]">
         <div className="flex-1 flex flex-col items-center justify-center py-8 px-4">
           <div className="text-black text-4xl font-semibold tracking-tighter text-center flex items-center justify-center">
-            <WifiWaves />
-            <span className="font-medium mx-2">wifi & embedded systems @ </span> amazon
-            <WifiWaves />
+            <span className="font-medium mx-2">
+              <Typewriter text="SWE-In-Build_v0.1" />
+            </span>
           </div>
           <div className="text-black text-2xl font-normal tracking-tighter text-center my-2">
             &
           </div>
           <div className="text-black flex items-center justify-center gap-2 text-2xl font-medium tracking-tighter text-center">
-            building{" "}
+            <Typewriter text="building " />{" "}
             <span className="pl-1 tracking-tighter bg-black text-white flex items-center justify-center gap-">
               <Link href="https://meridian-in.com" target="_blank">
-                Meridian.ai
+                Noriv.ai
               </Link>{" "}
               <Image
                 src={stealth}
-                alt="meridian"
+                alt="noriv"
                 width={30}
                 height={30}
                 className="rounded-full"
               />
             </span>
-          </div>
-          <div className="text-black text-center my-20 border border-dashed border-gray-300 px-4 flex justify-center items-center gap-2">
-            <span className="font-medium text-xs flex items-center gap-2"><LinkedInLogoIcon className="w-4 h-4" /> my linkedin post blew up:</span>
-            <span className="text-xs font-semibold tracking-tight"><Link href="https://www.linkedin.com/feed/update/urn:li:activity:7415087057733242880/" rel="noopener noreferrer" target="_blank">raw advice i wish i got at 16... (read more)</Link></span>
           </div>
         </div>
       </div>

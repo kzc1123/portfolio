@@ -13,7 +13,7 @@ export default function Projects() {
             <div className="text-2xl font-medium tracking-tighter text-white mb-10">
               <span className="font-light">building</span>{" "}
               <Link href="https://meridian-in.com" target="_blank" className="underline decoration-blue-500">
-                meridian.ai
+                Noriv.ai
               </Link>
             </div>
             <div className="flex-1 flex flex-col justify-between">
