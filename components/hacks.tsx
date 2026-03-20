@@ -23,7 +23,7 @@ const hackathons = [
 
 export default function Hacks() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col mt-20">
       <div className="relative">
         <h1 className="text-[4rem] sm:text-[6rem] md:text-[8rem] lg:text-[10rem] font-medium tracking-[-0.08em] md:tracking-[-0.1em] leading-[0.9] mb-6 md:mb-8 text-center w-full relative break-words">
           i love {" "}

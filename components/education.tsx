@@ -1,32 +1,4 @@
-"use client";
-
 import { GeistMono } from "geist/font/mono";
-
-function WaveHeading({ text }: { text: string }) {
-  return (
-    <>
-      <style>{`
-        @keyframes wave {
-          0%, 100% { opacity: 0.15; }
-          50% { opacity: 1; }
-        }
-      `}</style>
-      <span className="inline-flex">
-        {text.split("").map((char, i) => (
-          <span
-            key={i}
-            style={{
-              animation: "wave 2s ease-in-out infinite",
-              animationDelay: `${i * 0.15}s`,
-            }}
-          >
-            {char}
-          </span>
-        ))}
-      </span>
-    </>
-  );
-}
 
 const courses = [
   "Database Management", "Software QA & Testing", "Probability & Statistics",
@@ -38,12 +10,8 @@ export default function Education() {
   return (
     <div id="education" className="w-full flex flex-col items-center py-20 px-4">
       <div className="w-full max-w-3xl">
-        <h2 className="text-5xl font-semibold tracking-tighter text-black mb-12 text-center -mt-32">
-          <WaveHeading text="Education" />
-        </h2>
-
-        <div className="border-l-2 border-black pl-6">
-          <div className="text-4xl font-semibold tracking-tighter text-black">
+        <div>
+          <div className="text-4xl font-semibold tracking-tighter" style={{ color: "#8C1D40" }}>
             Arizona State University
           </div>
           <div className="text-base tracking-tighter text-gray-500 mt-1">

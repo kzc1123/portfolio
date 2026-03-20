@@ -1,33 +1,4 @@
-"use client";
-
 import { GeistMono } from "geist/font/mono";
-import { useEffect, useRef, useState } from "react";
-
-function WaveHeading({ text }: { text: string }) {
-  return (
-    <>
-      <style>{`
-        @keyframes wave {
-          0%, 100% { opacity: 0.15; }
-          50% { opacity: 1; }
-        }
-      `}</style>
-      <span className="inline-flex">
-        {text.split("").map((char, i) => (
-          <span
-            key={i}
-            style={{
-              animation: "wave 2s ease-in-out infinite",
-              animationDelay: `${i * 0.15}s`,
-            }}
-          >
-            {char}
-          </span>
-        ))}
-      </span>
-    </>
-  );
-}
 
 const roles = [
   {
@@ -50,49 +21,12 @@ const roles = [
   },
 ];
 
-function RoleCard({ role, delay }: { role: (typeof roles)[number]; delay: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => setVisible(true), delay);
-          observer.unobserve(el);
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [delay]);
-
+function RoleCard({ role }: { role: (typeof roles)[number] }) {
   return (
-    <div ref={ref} className="relative pl-6">
-      {/* Animated border */}
-      <div
-        className="absolute left-0 top-0 w-[2px] bg-black transition-all ease-out"
-        style={{
-          height: visible ? "100%" : "0%",
-          transitionDuration: "800ms",
-        }}
-      />
+    <div className="relative pl-6">
+      {/* border removed */}
 
-      {/* Content */}
-      <div
-        className="transition-all ease-out"
-        style={{
-          opacity: visible ? 1 : 0,
-          transform: visible ? "translateY(0)" : "translateY(8px)",
-          transitionDuration: "600ms",
-          transitionDelay: "400ms",
-        }}
-      >
+      <div>
         <div className="text-4xl font-semibold tracking-tighter text-black">
           {role.company}
         </div>
@@ -122,13 +56,9 @@ export default function Experience() {
   return (
     <div id="experience" className="w-full flex flex-col items-center py-20 px-4">
       <div className="w-full max-w-3xl">
-        <h2 className="text-5xl font-semibold tracking-tighter text-black mb-12 text-center">
-          <WaveHeading text="Experience" />
-        </h2>
-
         <div className="flex flex-col gap-12">
-          {roles.map((role, i) => (
-            <RoleCard key={role.company} role={role} delay={i * 200} />
+          {roles.map((role) => (
+            <RoleCard key={role.company} role={role} />
           ))}
         </div>
       </div>
