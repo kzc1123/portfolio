@@ -9,7 +9,7 @@ const courses = [
 export default function Education() {
   return (
     <div id="education" className="w-full flex flex-col items-center py-20 px-4">
-      <div className="w-full max-w-3xl">
+      <div className="w-full max-w-3xl text-center">
         <div>
           <div className="text-4xl font-semibold tracking-tighter" style={{ color: "#8C1D40" }}>
             Arizona State University
@@ -22,17 +22,17 @@ export default function Education() {
             Bachelor of Science in Computer Science
           </div>
 
-          <div className={`flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mt-2 text-base tracking-tighter text-gray-600 ${GeistMono.className}`}>
-            <span>Aug. 2023 &ndash; Dec. 2026</span>
+          <div className={`flex flex-col sm:flex-row sm:items-center sm:justify-center gap-2 sm:gap-4 mt-2 text-base tracking-tighter text-gray-600 ${GeistMono.className}`}>
+            <span>August 2023 &ndash; December 2026</span>
             <span className="hidden sm:inline">&bull;</span>
-            <span>GPA: 3.87 / 4.0</span>
+            <span>GPA: 3.91 / 4.0</span>
           </div>
 
           <div className="mt-8">
             <div className="text-sm uppercase tracking-wider text-gray-400 mb-2">
               coursework
             </div>
-            <div className={`flex flex-wrap gap-2 ${GeistMono.className}`}>
+            <div className={`flex flex-wrap justify-center gap-2 ${GeistMono.className}`}>
               {courses.map((course) => (
                 <span key={course} className="text-sm tracking-tighter text-gray-600">
                   {course} &bull;

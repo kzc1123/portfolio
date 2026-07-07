@@ -81,7 +81,7 @@ function TypewriterDisplay({ text }: { text: string }) {
 
 export default function Info() {
   const [display1, display2] = useSyncedTypewriter(
-    ["SWE-In-Build_v0.1", "building "],
+    ["SWE-In-Build_v0.1", "building"],
     { typeSpeed: 120, deleteSpeed: 50, pauseAfterType: 2000, pauseAfterDelete: 500 }
   );
 
@@ -98,8 +98,8 @@ export default function Info() {
             &
           </div>
           <div className="text-black flex items-center justify-center gap-2 text-2xl font-medium tracking-tighter text-center">
-            <TypewriterDisplay text={display2} />{" "}
-            <span className="pl-1 tracking-tighter bg-black text-white flex items-center justify-center gap-">
+            <TypewriterDisplay text={display2} />
+            <span className="pl-1 tracking-tighter bg-black text-white flex items-center justify-center gap-1">
               <Link href="https://meridian-in.com" target="_blank">
                 Noriv.ai
               </Link>{" "}
