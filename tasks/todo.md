@@ -98,14 +98,14 @@
 
 ## Bio / Personal Interests
 
-- [ ] **`components/info.tsx`** — Interests list: "i code / i blog / i design / i photograph / i play soccer / i travel" *(needs your interests)*
+- [x] **`components/info.tsx`**: Hero rebuilt as a split-flap ASCII board (`components/flap-board.ts`, `components/flap-mask.ts`). Cycles I CODE / COOK / GOLF / TRAVEL / PLAY BADMINTON / PHOTOGRAPH / THAT'S WHAT'S UP!; `?to=company` adds a HELLO greeting. Typewriter, meridian-in.com link, and the "building / i code" block removed
 
 ---
 
 ## Images
 
 - [ ] **`public/profile.jpg`** — Profile photo *(replace with yours)*
-- [ ] **`public/stealth.jpg`** — Startup logo image *(replace with Noriv logo)*
+- [ ] **`public/stealth.jpg`**: No longer used anywhere (hero no longer shows the Noriv logo); safe to delete
 - [ ] **`public/clip.jpg`** — Hackathons background image
 - [ ] **`public/snaps/1.jpeg`** — Photo *(replace with yours)*
 - [ ] **`public/snaps/2.jpeg`** — Photo *(replace with yours)*

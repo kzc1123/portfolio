@@ -1,168 +1,138 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import stealth from "@/public/stealth.jpg";
-import Link from "next/link";
+import { useEffect, useRef } from "react";
+import { useReducedMotion } from "framer-motion";
+import { GeistMono } from "geist/font/mono";
+import { GeistSans } from "geist/font/sans";
+import { createBoard, type BoardFrame } from "@/components/flap-board";
 
-// Shared hook that drives multiple typewriter texts off one clock
-function useSyncedTypewriter(
-  texts: string[],
-  {
-    typeSpeed = 120,
-    deleteSpeed = 50,
-    pauseAfterType = 2000,
-    pauseAfterDelete = 500,
-  } = {}
-) {
-  const maxLen = Math.max(...texts.map((t) => t.length));
-  // Total steps: type maxLen chars, pause, delete maxLen chars, pause
-  const totalTypeSteps = maxLen;
-  const totalDeleteSteps = maxLen;
+const HEADER = "BUILDING SOFTWARE AT SCALE.";
+const MOTTO = "HARD WORK BEATS TALENT.";
 
-  const [step, setStep] = useState(0);
-  const [phase, setPhase] = useState<"typing" | "pauseType" | "deleting" | "pauseDelete">("typing");
+const frames: readonly BoardFrame[] = [
+  { text: "I CODE", tile: "#09090b", ink: "#fafafa" },
+  { text: "I COOK", tile: "#bef264", ink: "#09090b" },
+  { text: "I GOLF", tile: "#fb7185", ink: "#09090b" },
+  { text: "I TRAVEL", tile: "#60a5fa", ink: "#09090b" },
+  { text: "I PLAY BADMINTON", compact: "I PLAY BAD- MINTON", tile: "#d8b4fe", ink: "#09090b" },
+  { text: "I PHOTOGRAPH", compact: "I PHOTO- GRAPH", tile: "#fb923c", ink: "#09090b" },
+  { text: "THAT'S WHAT'S UP!", tile: "#09090b", ink: "#fafafa" },
+];
 
-  useEffect(() => {
-    let delay: number;
+const MAX_GUEST = 14;
+const COMPACT_WORD = 7;
 
-    if (phase === "typing") {
-      if (step >= totalTypeSteps) {
-        setPhase("pauseType");
-        return;
-      }
-      delay = typeSpeed;
-    } else if (phase === "pauseType") {
-      delay = pauseAfterType;
-    } else if (phase === "deleting") {
-      if (step <= 0) {
-        setPhase("pauseDelete");
-        return;
-      }
-      delay = deleteSpeed;
-    } else {
-      delay = pauseAfterDelete;
-    }
-
-    const timer = setTimeout(() => {
-      if (phase === "typing") {
-        setStep((s) => s + 1);
-      } else if (phase === "pauseType") {
-        setPhase("deleting");
-        setStep(totalTypeSteps);
-      } else if (phase === "deleting") {
-        setStep((s) => s - 1);
-      } else {
-        setPhase("typing");
-        setStep(0);
-      }
-    }, delay);
-
-    return () => clearTimeout(timer);
-  }, [step, phase, totalTypeSteps, totalDeleteSteps, typeSpeed, deleteSpeed, pauseAfterType, pauseAfterDelete]);
-
-  // step goes 0..maxLen. For each text, map step proportionally to its length.
-  return texts.map((text) => {
-    const len = text.length;
-    const charIndex = Math.round((step / maxLen) * len);
-    const clamped = Math.min(charIndex, len);
-    return text.substring(0, clamped);
-  });
+// Splits any word longer than COMPACT_WORD letters in two, so a long company name still fits a phone.
+function compactGreeting(text: string): string {
+  return text
+    .split(" ")
+    .map((word) => {
+      if (word.length <= COMPACT_WORD) return word;
+      const half = Math.ceil(word.length / 2);
+      return `${word.slice(0, half)}- ${word.slice(half)}`;
+    })
+    .join(" ");
 }
 
-function TypewriterDisplay({ text }: { text: string }) {
-  return (
-    <span>
-      {text}
-      <span className="animate-pulse">|</span>
-    </span>
-  );
+// `?to=stripe` greets that company first. Only letters, digits and a few separators get through.
+function guestName(): string | null {
+  const raw = new URLSearchParams(window.location.search).get("to") ?? "";
+  const clean = raw
+    .toUpperCase()
+    .replace(/[^A-Z0-9 &.-]/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, MAX_GUEST)
+    .trim();
+  return clean || null;
 }
 
 export default function Info() {
-  const [display1, display2] = useSyncedTypewriter(
-    ["SWE-In-Build_v0.1", "Building"],
-    { typeSpeed: 120, deleteSpeed: 50, pauseAfterType: 2000, pauseAfterDelete: 500 }
-  );
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const reduce = useReducedMotion();
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    let disposed = false;
+    let cleanup = () => {};
+
+    document.fonts.ready.then(() => {
+      if (disposed) return;
+      const guest = guestName();
+      const board = createBoard(canvas, {
+        frames: guest
+          ? [
+              {
+                text: `HELLO ${guest}`,
+                compact: compactGreeting(`HELLO ${guest}`),
+                tile: "#09090b",
+                ink: "#fafafa",
+              },
+              ...frames,
+            ]
+          : frames,
+        header: HEADER,
+        headerRight: MOTTO,
+        sans: GeistSans.style.fontFamily,
+        mono: GeistMono.style.fontFamily,
+        reduce: Boolean(reduce),
+      });
+
+      const onMove = (e: PointerEvent) => {
+        const rect = canvas.getBoundingClientRect();
+        board.point(e.clientX - rect.left, e.clientY - rect.top);
+      };
+      const onClick = () => board.next();
+
+      let resizeTimer: ReturnType<typeof setTimeout> | undefined;
+      let lastWidth = canvas.parentElement?.clientWidth ?? 0;
+      const resizer = new ResizeObserver(() => {
+        const width = canvas.parentElement?.clientWidth ?? 0;
+        if (width === lastWidth) return;
+        lastWidth = width;
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => board.resize(), 150);
+      });
+      const watcher = new IntersectionObserver(
+        ([entry]) => board.setVisible(entry.isIntersecting),
+        { threshold: 0.25 }
+      );
+
+      canvas.addEventListener("pointermove", onMove);
+      canvas.addEventListener("pointerdown", onMove);
+      canvas.addEventListener("click", onClick);
+      if (canvas.parentElement) resizer.observe(canvas.parentElement);
+      watcher.observe(canvas);
+
+      cleanup = () => {
+        canvas.removeEventListener("pointermove", onMove);
+        canvas.removeEventListener("pointerdown", onMove);
+        canvas.removeEventListener("click", onClick);
+        clearTimeout(resizeTimer);
+        resizer.disconnect();
+        watcher.disconnect();
+        board.destroy();
+      };
+    });
+
+    return () => {
+      disposed = true;
+      cleanup();
+    };
+  }, [reduce]);
 
   return (
-    <div className="w-full flex flex-col items-stretch gap-2">
-      <div className="w-full flex flex-col items-center justify-center min-h-[500px]">
-        <div className="flex-1 flex flex-col items-center justify-center py-8 px-4">
-          <div className="text-black text-4xl font-semibold tracking-tighter text-center flex items-center justify-center">
-            <span className="font-medium mx-2">
-              <TypewriterDisplay text={display1} />
-            </span>
-          </div>
-          <div className="text-black text-2xl font-normal tracking-tighter text-center my-2">
-            &
-          </div>
-          <div className="text-black flex items-center justify-center gap-2 text-2xl font-medium tracking-tighter text-center">
-            <TypewriterDisplay text={display2} />
-            <span className="pl-1 tracking-tighter bg-black text-white flex items-center justify-center gap-1">
-              <Link href="https://meridian-in.com" target="_blank">
-                Noriv.ai
-              </Link>{" "}
-              <Image
-                src={stealth}
-                alt="noriv"
-                width={30}
-                height={30}
-                className="rounded-full"
-              />
-            </span>
-          </div>
-        </div>
-      </div>
-      <div className="w-full flex lg:flex-row flex-col items-center justify-center gap-10">
-        <div className="w-full lg:w-1/2 flex flex-col p-20">
-          <div className="flex-1 relative">
-            <div className="grid grid-cols-4 grid-rows-4 gap-0 w-full h-full min-h-[300px]">
-              {Array.from({ length: 16 }).map((_, index) => (
-                <div
-                  key={index}
-                  className="border border-dashed border-gray-300 aspect-square"
-                />
-              ))}
-            </div>
-            <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <div className="text-black text-5xl font-medium tracking-tighter text-center bg-white/80 px-4 py-2">
-                building
-              </div>
-              <div className="text-black text-5xl font-medium tracking-tighter text-center bg-white/80 px-4 py-2">
-                software at scale.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="w-full lg:w-1/2 bg-black text flex flex-col p-20">
-          <div className="flex-1 flex flex-col items-end justify-center p-4 leading-2">
-            <span className="text-white text-5xl font-semibold tracking-tighter">
-              i code
-            </span>
-            <span className="text-lime-300 text-5xl font-semibold tracking-tighter">
-              i cook
-            </span>
-            <span className="text-rose-400 text-5xl font-semibold tracking-tighter">
-              i golf
-            </span>
-            <span className="text-blue-400 text-5xl font-semibold tracking-tighter">
-              i travel
-            </span>
-
-            <span className="text-purple-300 text-5xl font-semibold tracking-tighter">
-              i play badminton
-            </span>
-            <span className="text-orange-400 text-5xl font-semibold tracking-tighter">
-              i photograph
-            </span>
-            <span className="text-white text-5xl font-semibold tracking-tighter">
-              that&apos;s what&apos;s up!
-            </span>
-          </div>
-        </div>
-      </div>
+    <div className="relative w-full h-[520px] md:h-[600px]">
+      <canvas
+        ref={canvasRef}
+        aria-hidden="true"
+        className="absolute inset-0 h-full w-full cursor-pointer touch-pan-y"
+      />
+      <p className="sr-only">
+        Building software at scale. Hard work beats talent. I code, cook, golf, travel, play badminton,
+        and photograph.
+      </p>
     </div>
   );
 }
