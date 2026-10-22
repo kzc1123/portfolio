@@ -20,7 +20,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              source code
+              Source code
             </Link>
             <ExternalLink className="w-2 h-2" />
           </div>

@@ -40,7 +40,7 @@
 - [x] **`components/info.tsx`** — Role headline: `SWE-In-Build_v0.1` (typewriter effect)
 - [x] **`components/info.tsx`** — Startup: `Noriv.ai` with typewriter on "building " *(link still points to meridian-in.com — needs Noriv URL)*
 - [x] **`components/projects.tsx`** — Noriv project card: `Noriv.ai` *(link still points to meridian-in.com — needs Noriv URL)*
-- [ ] **`components/projects.tsx`** — Noriv description *(unchanged — waiting for input)*
+- [x] **`components/projects.tsx`**: Rewritten from resume: Noriv.ai (incident orchestration) + Agent Monkey (fault injection). Quantum blog card and Medium links removed
 
 ---
 
@@ -50,7 +50,8 @@
 - [x] **`components/info.tsx`** — Removed WifiWaves, added typewriter to "SWE-In-Build_v0.1" and "building "
 - [x] **`components/info.tsx`** — Removed LinkedIn post callout div
 - [x] **`components/education.tsx`** — **NEW** — ASU, BS CS, Aug 2023–Dec 2026, GPA 3.87, static coursework list, resume download button (`/Resume.pdf`), wave heading animation
-- [x] **`components/experience.tsx`** — **NEW** — Lumity Media + Sherlocks.ai roles with scroll-triggered border-grow animation, wave heading animation
+- [x] **`components/experience.tsx`** + **`components/experience-figures.tsx`**: Redesigned. Sticky role index + live "Fig." per role (NucleusTeq bandit router, Lumity cross-surface sync, Sherlocks sequential vs concurrent timeline), metrics ticker, no em dashes in copy
+- [x] **`components/navbar.tsx`**: Mobile overflow fixed (banner + nav row fit 375px)
 - [x] **`app/page.tsx`** — Updated page order: Navbar → Info → Education → Experience → Exp → Projects → Hacks → Photos → Contact → Footer
 - [x] **`components/exp.tsx`** — Gutted: removed typewriter phrases, show more/less, Logos, resume button (moved to education.tsx)
 
@@ -70,14 +71,14 @@
 
 ## Companies Worked At
 
-- [ ] **`components/logos.tsx`** — Companies list *(still has old data — needs your companies or removal)*
+- [x] **`components/logos.tsx`** — Removed (was unused)
 
 ---
 
 ## Resume
 
 - [x] **`components/education.tsx`** — Resume download link: `/Resume.pdf`
-- [ ] **`public/Resume.pdf`** — Resume PDF file *(replace with yours)*
+- [x] **`public/Resume.pdf`**: Replaced with Kshitiz's resume (was Chaitanya's)
 - [ ] **`public/Resume_Chaitanya.pdf`** — Old resume *(delete or replace)*
 - [ ] **`public/Resume_Chaitanya.zip`** — Old resume zip *(delete or replace)*
 
@@ -85,15 +86,13 @@
 
 ## Hackathon Projects
 
-- [ ] **`components/hacks.tsx`** — LegalAid *(needs your hackathon projects)*
-- [ ] **`components/hacks.tsx`** — Incognito
-- [ ] **`components/hacks.tsx`** — DocChain
+- [x] **`components/hacks.tsx`**: LegalAid, Incognito, DocChain cards and "What I've built" label removed; only the "I love building" heading remains, now above Projects
 
 ---
 
 ## Blog / Projects Content
 
-- [ ] **`components/projects.tsx`** — Blog post title *(needs your blog post)*
+- [x] **`components/projects.tsx`**: Blog card removed (was Chaitanya's)
 
 ---
 
@@ -125,7 +124,18 @@
 
 ## Cleanup
 
-- [ ] **`components/exp.tsx`** — Empty shell, consider removing entirely and from `page.tsx`
-- [ ] **`components/logos.tsx`** — Unused import removed from exp.tsx, but component still exists — remove if not needed
+- [x] **`components/exp.tsx`** — Removed, no longer referenced from `page.tsx`
+- [x] **`components/logos.tsx`** — Removed (was unused)
 - [ ] **`components/navbar.tsx`** — Medium blog link removed during restructure
-- [ ] **`app/page.tsx`** — Section IDs `#work` and `#more` still on Exp/Projects wrappers — update or remove to match new nav
+- [x] **`app/page.tsx`** — `#work` / `#more` IDs gone; sections now switch via the ruler carousel
+- [x] **`package.json`** — Removed 15 unused deps (three, @react-three/fiber, @mui/icons-material, react-router-dom, react-scroll, motion, …); pinned `next` to `^14.2.14`
+- [ ] **`bash.exe.stackdump`** — Stray Windows crash dump committed at repo root — delete
+
+---
+
+## Synced to resume (2026-10-21)
+
+- [x] **`components/education.tsx`**: Graduation May 2027; Skills block added; GPA count-up in the degree card (`components/count-up.tsx` shared with Experience); resume button now solid black
+- [x] **`components/experience.tsx`**: Lumity is Tempe, AZ / 39.8k lines / fetch-layer GET dedup bullet; DevLabs leadership card removed
+- [x] **`components/hacks.tsx`**: Chaitanya's hackathons removed
+- [x] **`components/projects.tsx`**: Rebuilt with an animated system diagram per project (`components/project-diagrams.tsx`)

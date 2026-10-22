@@ -30,23 +30,23 @@ export default function Navbar({
   return (
     <div className="w-full" id="home">
       {/* Banner */}
-      <div className="flex items-center justify-between w-full h-[125px] bg-black overflow-hidden">
-        <div className="text-5xl sm:text-7xl md:text-8xl lg:text-[8rem] font-semibold tracking-[-0.1em] text-white whitespace-nowrap">
+      <div className="flex items-center justify-between w-full h-[90px] sm:h-[125px] bg-black overflow-hidden">
+        <div className="text-4xl sm:text-7xl md:text-8xl lg:text-[8rem] font-semibold tracking-[-0.1em] text-white whitespace-nowrap">
           &copy;2026
         </div>
 
-        <div className="relative h-full w-[280px] sm:w-[320px] md:w-[350px] flex items-center justify-center">
+        <div className="relative h-full w-[96px] sm:w-[320px] md:w-[350px] shrink-0 flex items-center justify-center">
           <Image
             src={profile.src}
             alt="Profile"
             width={180}
             height={180}
-            className="h-32 max-w-fit object-cover grayscale"
+            className="h-full sm:h-32 w-auto max-w-fit object-cover grayscale"
             priority
           />
         </div>
 
-        <div className="text-5xl sm:text-7xl md:text-8xl lg:text-[8rem] font-semibold tracking-[-0.1em] text-white whitespace-nowrap overflow-hidden text-right select-none pr-4">
+        <div className="text-4xl sm:text-7xl md:text-8xl lg:text-[8rem] font-semibold tracking-[-0.1em] text-white whitespace-nowrap overflow-hidden text-right select-none pr-2 sm:pr-4">
           KSHITIZ
         </div>
       </div>
@@ -65,12 +65,12 @@ export default function Navbar({
           </Link>
         </div>
 
-        <nav className="flex items-center gap-4">
+        <nav className="flex items-center gap-2 sm:gap-4">
           {navLinks.map((link, i) => (
             <React.Fragment key={link.label}>
               <button
                 onClick={() => handleClick(link.label)}
-                className="hover:text-gray-500 transition-colors cursor-pointer bg-transparent border-none p-0 text-sm tracking-tighter text-black"
+                className="hover:text-gray-500 transition-colors cursor-pointer bg-transparent border-none p-0 text-xs sm:text-sm tracking-tighter text-black"
               >
                 {link.label}
               </button>

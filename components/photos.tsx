@@ -6,10 +6,10 @@ import pic4 from "@/public/snaps/4.jpg";
 import { GeistMono } from "geist/font/mono";
 
 const photos = [
-  { src: pic1, location: "09/25, las vegas" },
-  { src: pic3, location: "12/25, el granada" },
-  { src: pic4, location: "12/25, san francisco" },
-  { src: pic2, location: "05/25, manali, india" },
+  { src: pic1, location: "09/25, Las Vegas" },
+  { src: pic3, location: "12/25, El Granada" },
+  { src: pic4, location: "12/25, San Francisco" },
+  { src: pic2, location: "05/25, Manali, India" },
 ];
 
 export default function Photos() {

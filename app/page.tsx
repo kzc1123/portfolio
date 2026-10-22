@@ -35,8 +35,8 @@ const sectionMap: Record<string, React.ReactNode> = {
   ),
   Projects: (
     <>
-      <Projects />
       <Hacks />
+      <Projects />
     </>
   ),
   Snaps: <Photos />,

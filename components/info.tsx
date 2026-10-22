@@ -81,7 +81,7 @@ function TypewriterDisplay({ text }: { text: string }) {
 
 export default function Info() {
   const [display1, display2] = useSyncedTypewriter(
-    ["SWE-In-Build_v0.1", "building"],
+    ["SWE-In-Build_v0.1", "Building"],
     { typeSpeed: 120, deleteSpeed: 50, pauseAfterType: 2000, pauseAfterDelete: 500 }
   );
 
