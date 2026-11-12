@@ -1,8 +1,9 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
+import { PERSON, TAGLINE } from "@/lib/site";
 
-export const alt = "Kshitiz Chaurasia, software engineer";
+export const alt = `${PERSON.name}, ${PERSON.jobTitle}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -86,8 +87,18 @@ export default async function OpengraphImage() {
               <FlapTile key={i} ch={ch} />
             ))}
           </div>
-          <div style={{ display: "flex", fontFamily: "Geist", fontSize: 46, letterSpacing: "-0.04em" }}>
-            Software engineer. CS at Arizona State.
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              fontFamily: "Geist",
+              fontSize: 44,
+              lineHeight: 1.15,
+              letterSpacing: "-0.04em",
+            }}
+          >
+            <span>{TAGLINE}</span>
+            <span style={{ color: MUTED }}>CS at Arizona State.</span>
           </div>
         </div>
 

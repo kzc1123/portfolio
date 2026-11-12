@@ -69,6 +69,9 @@ const RulerLines = ({
   return <div className="relative w-full h-8 px-4">{lines}</div>;
 };
 
+const WAVE_CYCLE_S = 2.4;
+const WAVE_STAGGER_S = 0.13;
+
 const WaveText = ({ text }: { text: string }) => (
   <span className="inline-flex">
     <style>{`
@@ -81,8 +84,10 @@ const WaveText = ({ text }: { text: string }) => (
       <span
         key={i}
         style={{
-          animation: "wifiWave 1.5s ease-in-out infinite",
-          animationDelay: `${i * 0.08}s`,
+          animation: `wifiWave ${WAVE_CYCLE_S}s ease-in-out infinite`,
+          // Negative delay: every letter starts mid-wave when the title mounts,
+          // instead of sitting at full opacity and snapping to 0.3 when its turn comes.
+          animationDelay: `${i * WAVE_STAGGER_S - WAVE_CYCLE_S}s`,
         }}
       >
         {char === " " ? "\u00A0" : char}

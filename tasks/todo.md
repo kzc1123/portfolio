@@ -151,3 +151,14 @@
 - [ ] **Vercel env vars**: When the Vercel project is set up, add the same three keys for Production, then send a test message from the live site
 - [ ] **EmailJS security**: Account > Security, restrict requests to the live domain once it exists
 - [ ] **Deploy**: Commit on `redesign`, merge into `main`, push
+
+## Search (2026-11-11)
+
+- [x] **`lib/site.ts`**: One place for `SITE_URL` (https://itskz.vercel.app), name, title, socials
+- [x] **`app/layout.tsx`**: Title "Kshitiz Chaurasia | Software Engineer", `metadataBase`, canonical, Open Graph profile, schema.org `Person` JSON-LD (GitHub + LinkedIn in `sameAs`)
+- [x] **`components/navbar.tsx`**: Banner KSHITIZ is now the page `h1` with screen-reader text "Kshitiz Chaurasia, Software Engineer" (looks identical)
+- [x] **`app/sitemap.ts`** + **`app/robots.ts`**: `/sitemap.xml` and `/robots.txt`
+- [x] **`next.config.mjs`**: 308 redirect from `kshitiz-chaurasia.vercel.app` to `itskz.vercel.app`
+- [ ] **Google Search Console**: Verify `https://itskz.vercel.app`, submit `sitemap.xml`, request indexing
+- [ ] **Backlinks**: Site URL on LinkedIn (Contact info + Featured), GitHub profile Website + README, resume, Devpost, Handshake
+- [ ] **Domain change?** If buying a real domain, update `SITE_URL` in `lib/site.ts` and the redirect in `next.config.mjs`

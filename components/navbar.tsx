@@ -46,9 +46,10 @@ export default function Navbar({
           />
         </div>
 
-        <div className="text-4xl sm:text-7xl md:text-8xl lg:text-[8rem] font-semibold tracking-[-0.1em] text-white whitespace-nowrap overflow-hidden text-right select-none pr-2 sm:pr-4">
-          KSHITIZ
-        </div>
+        <h1 className="text-4xl sm:text-7xl md:text-8xl lg:text-[8rem] font-semibold tracking-[-0.1em] text-white whitespace-nowrap overflow-hidden text-right select-none pr-2 sm:pr-4">
+          <span aria-hidden="true">KSHITIZ</span>
+          <span className="sr-only">Kshitiz Chaurasia, Software Engineer</span>
+        </h1>
       </div>
 
       {/* Info bar */}
