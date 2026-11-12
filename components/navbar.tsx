@@ -56,7 +56,7 @@ export default function Navbar({
         className={`flex flex-col sm:flex-row items-center justify-between py-2 px-1 text-sm tracking-tighter text-black ${GeistMono.className}`}
       >
         <div className="hidden sm:block">
-          21 &bull; Tempe &bull; Arizona State (Go Devils!) &bull;{" "}
+          22 &bull; Tempe &bull; Arizona State (Go Devils!) &bull;{" "}
           <Link
             href="mailto:kshitizchaurasia30@gmail.com"
             className="hover:text-gray-500 transition-colors no-underline"

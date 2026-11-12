@@ -3,7 +3,7 @@
 ## Name & Identity
 
 - [x] **`app/layout.tsx`** — Page title: `"Kshitiz Chaurasia"`
-- [ ] **`app/layout.tsx`** — Meta description: `"this is me!"` *(unchanged — waiting for input)*
+- [x] **`app/layout.tsx`**: Meta description rewritten (was the template's `"this is me!"`)
 - [x] **`components/navbar.tsx`** — Hero banner name: `KSHITIZ`
 - [x] **`components/footer.tsx`** — Copyright text: `Kshitiz Chaurasia`
 - [x] **`components/contact.tsx`** — EmailJS `to_name`: `"Kshitiz"`
@@ -12,7 +12,7 @@
 
 ## Age, Location & Education
 
-- [x] **`components/navbar.tsx`** — Info bar: `21 · tempe · arizona state (go devils!) · kshitizchaurasia30@gmail.com`
+- [x] **`components/navbar.tsx`** — Info bar: `22 · tempe · arizona state (go devils!) · kshitizchaurasia30@gmail.com`
 
 ---
 
@@ -28,10 +28,10 @@
 - [x] **`components/footer.tsx`** — GitHub source repo: `https://github.com/kzc1123/portfolio`
 - [x] **`components/footer.tsx`** — GitHub profile: `https://github.com/kzc1123`
 - [x] **`components/footer.tsx`** — LinkedIn: `https://www.linkedin.com/in/kshitizchaurasia/`
-- [ ] **`components/footer.tsx`** — Instagram: `https://instagram.com/chaitanya_chaurasia` *(needs your Instagram)*
-- [ ] **`components/footer.tsx`** — X/Twitter: `https://x.com/itschai_tea` *(needs your X handle)*
-- [ ] **`components/projects.tsx`** — Medium blog (quantum article) *(needs your blog post URL)*
-- [ ] **`components/projects.tsx`** — Medium all blogs *(needs your Medium URL)*
+- [x] **`components/footer.tsx`**: Template Instagram link removed
+- [x] **`components/footer.tsx`**: Template X/Twitter link removed
+- [x] **`components/projects.tsx`**: Template Medium blog card removed
+- [x] **`components/projects.tsx`**: Template Medium link removed
 
 ---
 
@@ -79,8 +79,8 @@
 
 - [x] **`components/education.tsx`** — Resume download link: `/Resume.pdf`
 - [x] **`public/Resume.pdf`**: Replaced with Kshitiz's resume (was Chaitanya's)
-- [ ] **`public/Resume_Chaitanya.pdf`** — Old resume *(delete or replace)*
-- [ ] **`public/Resume_Chaitanya.zip`** — Old resume zip *(delete or replace)*
+- [x] **`public/Resume_Chaitanya.pdf`**: Deleted
+- [x] **`public/Resume_Chaitanya.zip`**: Deleted
 
 ---
 
@@ -104,32 +104,27 @@
 
 ## Images
 
-- [ ] **`public/profile.jpg`** — Profile photo *(replace with yours)*
-- [ ] **`public/stealth.jpg`**: No longer used anywhere (hero no longer shows the Noriv logo); safe to delete
-- [ ] **`public/clip.jpg`** — Hackathons background image
-- [ ] **`public/snaps/1.jpeg`** — Photo *(replace with yours)*
-- [ ] **`public/snaps/2.jpeg`** — Photo *(replace with yours)*
-- [ ] **`public/snaps/3.jpeg`** — Photo *(replace with yours)*
+- [x] **`public/profile.jpg`**: Your photo
+- [x] **`public/stealth.jpg`**: Deleted (unused)
+- [ ] **`public/clip.jpg`**: Template image kept on purpose as the "building" text texture in `components/hacks.tsx` (resized from 4000x6000 / 3.9 MB to 933x1400 / ~120 KB). Swap for your own image someday if you want zero template assets
+- [x] **`public/snaps/1-4.jpg`**: Your photos; unused `2_original.jpg` deleted
 
 ---
 
 ## Photo Captions
 
-- [ ] **`components/photos.tsx`** — `"05/23, leh, india"` *(needs your caption)*
-- [ ] **`components/photos.tsx`** — `"05/25, new york"` *(needs your caption)*
-- [ ] **`components/photos.tsx`** — `"12/23, golden gate"` *(needs your caption)*
-- [ ] **`components/photos.tsx`** — Alt text: `"San Francisco"` *(needs update)*
+- [x] **`components/photos.tsx`**: Captions and alt text are yours (Las Vegas, El Granada, San Francisco, Manali)
 
 ---
 
 ## Cleanup
 
-- [x] **`components/exp.tsx`** — Removed, no longer referenced from `page.tsx`
+- [x] **`components/exp.tsx`**: Deleted (was an empty div still rendered under Experience)
 - [x] **`components/logos.tsx`** — Removed (was unused)
-- [ ] **`components/navbar.tsx`** — Medium blog link removed during restructure
+- [x] **`components/navbar.tsx`**: Medium blog link removed during restructure
 - [x] **`app/page.tsx`** — `#work` / `#more` IDs gone; sections now switch via the ruler carousel
 - [x] **`package.json`** — Removed 15 unused deps (three, @react-three/fiber, @mui/icons-material, react-router-dom, react-scroll, motion, …); pinned `next` to `^14.2.14`
-- [ ] **`bash.exe.stackdump`** — Stray Windows crash dump committed at repo root — delete
+- [x] **`bash.exe.stackdump`**: Deleted
 
 ---
 
@@ -139,3 +134,11 @@
 - [x] **`components/experience.tsx`**: Lumity is Tempe, AZ / 39.8k lines / fetch-layer GET dedup bullet; DevLabs leadership card removed
 - [x] **`components/hacks.tsx`**: Chaitanya's hackathons removed
 - [x] **`components/projects.tsx`**: Rebuilt with an animated system diagram per project (`components/project-diagrams.tsx`)
+
+## Pre-publish (2026-11-11)
+
+- [x] **`components/contact.tsx`**: Removed `console.log(response)`; empty messages are now rejected with a toast; typed the click event
+- [x] **`app/opengraph-image.tsx`**: Link-preview image (1200x630, split-flap KSHITIZ tiles + hobby tiles); `twitter.card = summary_large_image` in `app/layout.tsx`
+- [x] **`components/flap-board.ts`**: `HOLD_MS` 3200 to 2250 (each hero word stays up 2.25 s)
+- [ ] **Vercel env vars**: Confirm the three `NEXT_PUBLIC_EMAILJS_*` keys are set for Production, then send a test message from the live site
+- [ ] **Deploy**: Commit on `redesign`, merge into `main`, push

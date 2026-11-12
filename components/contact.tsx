@@ -15,16 +15,21 @@ const ContactPage = () => {
   const sendEmail = async (
     senderEmail: string,
     senderMessage: string,
-    e: any
+    e: React.MouseEvent<HTMLButtonElement>
   ) => {
     e.preventDefault();
-    setLoading(true);
 
     if (!isEmailValid(senderEmail)) {
       toast.error("Invalid email address");
-      setLoading(false);
       return;
     }
+
+    if (!senderMessage.trim()) {
+      toast.error("Write a message first");
+      return;
+    }
+
+    setLoading(true);
 
     try {
       const serviceID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ?? "";
@@ -37,15 +42,8 @@ const ContactPage = () => {
         to_name: "Kshitiz",
       };
 
-      const response = await emailjs.send(
-        serviceID,
-        templateID,
-        templateParams,
-        publicKey
-      );
+      await emailjs.send(serviceID, templateID, templateParams, publicKey);
 
-      console.log(response);
-      
       toast.success(`Email sent successfully from ${senderEmail}`);
       setSenderEmail("");
       setSenderMessage("");

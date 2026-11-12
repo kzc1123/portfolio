@@ -54,7 +54,7 @@ const FIELD_DENSITY = 0.16;
 const FLAP_MS = 70;
 const SCRAMBLE_MS = 55;
 const WAVE_MS_PER_COL = 11;
-const HOLD_MS = 3200;
+const HOLD_MS = 2250;
 const POINTER_RADIUS = 36;
 // Below this many columns, long words need their compact breaks to stay readable.
 const NARROW_COLS = 70;

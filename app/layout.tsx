@@ -7,7 +7,9 @@ import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
   title: "Kshitiz Chaurasia",
-  description: "this is me!",
+  description:
+    "Kshitiz Chaurasia: software engineer and CS student at Arizona State. Experience, projects, and photos.",
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({

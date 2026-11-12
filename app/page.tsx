@@ -7,7 +7,6 @@ import Info from "@/components/info";
 import Education from "@/components/education";
 import Experience from "@/components/experience";
 import Projects from "@/components/projects";
-import Exp from "@/components/exp";
 import ContactPage from "@/components/contact";
 import Footer from "@/components/footer";
 import Photos from "@/components/photos";
@@ -27,12 +26,7 @@ const rulerItems: CarouselItem[] = [
 
 const sectionMap: Record<string, React.ReactNode> = {
   Education: <Education />,
-  Experience: (
-    <>
-      <Experience />
-      <Exp />
-    </>
-  ),
+  Experience: <Experience />,
   Projects: (
     <>
       <Hacks />
