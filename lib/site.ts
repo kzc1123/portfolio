@@ -12,7 +12,10 @@ export const PERSON = {
   linkedin: "https://www.linkedin.com/in/kshitizchaurasia/",
 } as const;
 
-export const TAGLINE = `${PERSON.jobTitle} building AI systems.`;
+// Google Search Console ownership token (URL-prefix property for SITE_URL). Public by design.
+export const GOOGLE_SITE_VERIFICATION = "yS_-AyHdBjhmIQV_pV4HClNudaylslYpjOlpyi-mYhs";
+
+export const TAGLINE =`${PERSON.jobTitle} building AI systems.`;
 
 export const SITE_TITLE = `${PERSON.name} | ${PERSON.jobTitle}`;
 export const SITE_DESCRIPTION = `${PERSON.name}: ${TAGLINE} CS student at Arizona State. Experience, projects, and photos.`;

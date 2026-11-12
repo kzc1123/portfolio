@@ -3,7 +3,13 @@ import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { Analytics } from "@vercel/analytics/react";
-import { PERSON, SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "@/lib/site";
+import {
+  GOOGLE_SITE_VERIFICATION,
+  PERSON,
+  SITE_DESCRIPTION,
+  SITE_TITLE,
+  SITE_URL,
+} from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -18,6 +24,7 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
   },
   twitter: { card: "summary_large_image" },
+  verification: { google: GOOGLE_SITE_VERIFICATION },
 };
 
 // schema.org Person: tells search engines who the page is about and links the profiles.
