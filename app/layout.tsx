@@ -25,7 +25,7 @@ export default function RootLayout({
       >
           {children}
           <Analytics />
-        <Toaster />
+        <Toaster closeButton />
       </body>
     </html>
   );

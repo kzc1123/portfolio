@@ -7,6 +7,40 @@ import { toast } from "sonner";
 import emailjs from "emailjs-com";
 import { isEmailValid } from "@/lib/helper";
 
+const CONTACT_EMAIL = "kshitizchaurasia30@gmail.com";
+const FALLBACK_SUBJECT = "Hello from your portfolio";
+const FALLBACK_TOAST_MS = 20000;
+
+const EMAILJS = {
+  serviceID: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ?? "",
+  templateID: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? "",
+  publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY ?? "",
+} as const;
+
+const isEmailJsConfigured = Object.values(EMAILJS).every(Boolean);
+
+// mailto wants %20 for spaces; URLSearchParams writes "+".
+function mailtoHref(message: string): string {
+  const query = new URLSearchParams({ subject: FALLBACK_SUBJECT, body: message });
+  return `mailto:${CONTACT_EMAIL}?${query.toString().replace(/\+/g, "%20")}`;
+}
+
+// When the form can't send, hand the visitor a direct email link with their message already filled in.
+function showEmailFallback(message: string): void {
+  toast.error("Couldn't send that one.", {
+    description: (
+      <span>
+        Email me at{" "}
+        <a href={mailtoHref(message)} className="underline underline-offset-2">
+          {CONTACT_EMAIL}
+        </a>
+        . Your message carries over.
+      </span>
+    ),
+    duration: FALLBACK_TOAST_MS,
+  });
+}
+
 const ContactPage = () => {
   const [loading, setLoading] = useState(false);
   const [senderEmail, setSenderEmail] = useState("");
@@ -29,27 +63,33 @@ const ContactPage = () => {
       return;
     }
 
+    if (!isEmailJsConfigured) {
+      showEmailFallback(senderMessage);
+      return;
+    }
+
     setLoading(true);
 
     try {
-      const serviceID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ?? "";
-      const templateID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? "";
-      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY ?? "";
-
       const templateParams = {
         from_name: senderEmail,
         message: senderMessage,
         to_name: "Kshitiz",
       };
 
-      await emailjs.send(serviceID, templateID, templateParams, publicKey);
+      await emailjs.send(
+        EMAILJS.serviceID,
+        EMAILJS.templateID,
+        templateParams,
+        EMAILJS.publicKey
+      );
 
       toast.success(`Email sent successfully from ${senderEmail}`);
       setSenderEmail("");
       setSenderMessage("");
     } catch (error) {
       console.error("EmailJS Error:", error);
-      toast.error("Failed to send email");
+      showEmailFallback(senderMessage);
     } finally {
       setLoading(false);
     }
@@ -71,7 +111,7 @@ const ContactPage = () => {
       <div className="container mx-auto px-4">
         <div className="bg-white dark:bg-black bg-opacity-80 dark:bg-opacity-80 backdrop-blur-sm p-8 rounded-lg max-w-3xl mx-auto">
           <h2 className="text-5xl font-medium tracking-tighter text-center mb-10">
-            I&apos;m bored, let&apos;s talk.
+            What&apos;s up with you?
           </h2>
 
           <div className="space-y-4 max-w-md mx-auto">
@@ -86,7 +126,7 @@ const ContactPage = () => {
 
             <Textarea
               value={senderMessage}
-              placeholder="My dog says hi..."
+              placeholder="Hiring, building something, or found a hidden travel gem..."
               rows={4}
               className="w-full"
               onChange={(e) => setSenderMessage(e.target.value)}

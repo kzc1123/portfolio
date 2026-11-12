@@ -19,7 +19,7 @@
 ## Email & Contact
 
 - [x] **`components/navbar.tsx`** — Email in info bar: `kshitizchaurasia30@gmail.com` (clickable mailto link)
-- [ ] **`components/contact.tsx`** — EmailJS service/template/key env vars *(keep as env vars — needs .env config)*
+- [x] **`components/contact.tsx`**: EmailJS keys live in `.env.local` (see Pre-publish below)
 
 ---
 
@@ -139,6 +139,15 @@
 
 - [x] **`components/contact.tsx`**: Removed `console.log(response)`; empty messages are now rejected with a toast; typed the click event
 - [x] **`app/opengraph-image.tsx`**: Link-preview image (1200x630, split-flap KSHITIZ tiles + hobby tiles); `twitter.card = summary_large_image` in `app/layout.tsx`
-- [x] **`components/flap-board.ts`**: `HOLD_MS` 3200 to 2250 (each hero word stays up 2.25 s)
-- [ ] **Vercel env vars**: Confirm the three `NEXT_PUBLIC_EMAILJS_*` keys are set for Production, then send a test message from the live site
+- [x] **`components/flap-board.ts`**: `HOLD_MS` 3200 to 2500 (each hero word stays up 2.5 s)
+- [x] **`components/contact.tsx`**: Copy is now "What's up with you?" / "Hiring, building something, or found a hidden travel gem..."
+- [x] **EmailJS account**: Gmail service + "Contact Us" template (body `{{from_name}}` + `{{message}}`, Reply To `{{from_name}}`, To Email = your Gmail)
+- [x] **`.env.local`**: All three `NEXT_PUBLIC_EMAILJS_*` keys set; `.env.example` lists them for reference
+- [x] **`components/contact.tsx`**: Email fallback. If keys are missing or EmailJS fails, the error toast shows a mailto link with the visitor's message pre-filled (tested with a forced failure)
+- [x] **`package-lock.json`**: `caniuse-lite` updated; dev-server Browserslist warning gone
+- [x] **Local send test**: Gmail service reconnected in EmailJS (was failing with 412 "Gmail_API: Not found the sessional location", fixed by reconnecting and granting send permission); real send from `npm run dev` succeeded
+- [ ] **Reply-To check**: In Gmail, hit Reply on the test message and confirm it addresses the sender, not you
+- [x] **`app/layout.tsx`**: `<Toaster closeButton />` so every notification can be dismissed
+- [ ] **Vercel env vars**: When the Vercel project is set up, add the same three keys for Production, then send a test message from the live site
+- [ ] **EmailJS security**: Account > Security, restrict requests to the live domain once it exists
 - [ ] **Deploy**: Commit on `redesign`, merge into `main`, push

@@ -6,3 +6,4 @@
 - **Ask before removing a section the user didn't mention.** Proposing to replace the "building / i code" block was unwanted; scope redesigns to exactly the area pointed at.
 - **"Make the transitions faster" on the flap board meant the dwell time per word (`HOLD_MS`), not the flip animation speed.** When a timing request is ambiguous between "how long it stays" and "how fast it moves", default to the time between changes, or ask in one line.
 - **Show before/after for any visual swap, even inside a cleanup.** Replacing `clip.jpg` with a sunset during "remove template files" surprised the user; they wanted the original look kept.
+- **Never run `next build` / `next start` while the user's `npm run dev` may be running.** Both use `.next/`; a build overwrites the dev server's files and the dev page 404s on `page.js`, `main-app.js`, CSS. Check `lsof -iTCP:3000 -sTCP:LISTEN` first; if dev is up, ask before building. Recovery: stop dev, `rm -rf .next`, restart.
